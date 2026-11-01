@@ -382,7 +382,7 @@ func TestUpgradeRejectsProviderVersionBeyondPlannedLevel(t *testing.T) {
 	}
 }
 
-func TestSyntheticChildActionDoesNotDowngradeRootLock(t *testing.T) {
+func TestNoOpActionDoesNotDowngradeRootLock(t *testing.T) {
 	h := newHarness(t, nil)
 	useFakeTerraform(t, h)
 	ws, err := h.opts.open()
@@ -409,7 +409,7 @@ func TestSyntheticChildActionDoesNotDowngradeRootLock(t *testing.T) {
 	}
 }
 
-func TestSyntheticChildActionDoesNotOverrideRealTarget(t *testing.T) {
+func TestNoOpActionDoesNotOverrideRealTarget(t *testing.T) {
 	h := newHarness(t, nil)
 	useFakeTerraform(t, h)
 	ws, err := h.opts.open()
@@ -432,7 +432,7 @@ func TestSyntheticChildActionDoesNotOverrideRealTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	if got := locks[address.String()].Version; got != "5.6.0" {
-		t.Errorf("synthetic child floor replaced planned 5.6.0 with %s", got)
+		t.Errorf("no-op action replaced planned 5.6.0 with %s", got)
 	}
 }
 
